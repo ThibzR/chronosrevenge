@@ -4,9 +4,11 @@ from django.http import HttpResponse, FileResponse
 from django.template import loader
 from django.contrib import messages
 from .calendar import get_calendar
-from .models import Course
+from .models import Course, Group
 from .forms import GroupForm, process_form
 import arrow
+from rest_framework import viewsets
+from .serializers import GroupSerializer, CourseSerializer
 
 
 def index(request):
@@ -38,3 +40,11 @@ def index(request):
     else:
         process_form(request)
         return redirect(reverse('index'))
+
+class GroupView(viewsets.ModelViewSet):
+  serializer_class = GroupSerializer
+  queryset = Group.objects.all()
+
+class CourseView(viewsets.ModelViewSet):
+    serializer_class = CourseSerializer
+    queryset = Course.objects.all()

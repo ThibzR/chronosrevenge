@@ -4,3 +4,6 @@ migrations
 *.rdb
 __pycache__
 *.swp
+redis/
+.idea
+node_modules/
